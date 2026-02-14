@@ -34,6 +34,19 @@ function Navbar() {
 
   }
 
+  const openSignUp = async () => {
+    try {
+      if(clerk && typeof clerk.openSignUp === "function") {
+        clerk.openSignUp();
+      }else{
+        navigate("/signup");
+      }
+    }catch (error) {
+      console.error("Error during sign-up:", error);
+      navigate("/signup");
+    }
+  }
+
   return (
     <header className={navbarStyles.header}>
       <div className={navbarStyles.container}>
@@ -57,6 +70,12 @@ function Navbar() {
                     className={navbarStyles.signInButton}
                     type="button"
                   >Sign In</button>
+
+                  <button
+                    onClick={openSignUp}
+                    className={navbarStyles.signUpButton}
+                    type="button"
+                  >Sign Up</button>
               </SignedOut>
             </div>
           </div>
