@@ -68,7 +68,7 @@ function Navbar() {
 
   useEffect(() => {
     if (isSignedIn) {
-      navigate("/dashboard", { replace: true });
+      navigate("/app/dashboard", { replace: true });
     }
   }, [isSignedIn, navigate]);
 
