@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar'
 import Hero from './Hero'
 import Feature from '../components/Feature'
 import Pricing from '../components/Pricing'
+import Footer from '../components/Footer'
 
 function Home() {
   return (
@@ -15,6 +16,7 @@ function Home() {
           </div>
           <Pricing />
         </main>
+        <Footer />
     </div>
   )
 }
