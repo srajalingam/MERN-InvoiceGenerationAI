@@ -221,32 +221,32 @@ export async function getInvoices(req, res) {
         .status(401)
         .json({ success: false, message: "Authentication required" });
     }
+
+    const q = { owner: userId };
+    if (req.query.status) {
+      q.status = String(req.query.status).toLowerCase();
+    }
+    if (req.query.invoiceNumber) {
+      q.invoiceNumber = String(req.query.invoiceNumber).trim();
+    }
+    // for filter
+
+    if (req.query.search) {
+      const search = req.query.search.trim();
+      q.$or = [
+        { fromEmail: { $regex: search, $options: "i" } },
+        { "client.name": { $regex: search, $options: "i" } },
+        { "client.email": { $regex: search, $options: "i" } },
+        { invoiceNumber: { $regex: search, $options: "i" } },
+      ];
+    }
+
+    const invoices = await Invoice.find(q).sort({ createdAt: -1 });
+    return res.json({ success: true, data: invoices });
   } catch (err) {
     console.error("getInvoices error:", err);
     return res.status(500).json({ success: false, message: "Server error" });
   }
-
-  const q = { owner: userId };
-  if (req.query.status) {
-    q.status = String(req.query.status).toLowerCase();
-  }
-  if (req.query.invoiceNumber) {
-    q.invoiceNumber = String(req.query.invoiceNumber).trim();
-  }
-  // for filter
-
-  if (req.query.search) {
-    const search = req.query.search.trim();
-    q.$or = [
-      { fromEmail: { $regex: search, $options: "i" } },
-      { "client.name": { $regex: search, $options: "i" } },
-      { "client.email": { $regex: search, $options: "i" } },
-      { invoiceNumber: { $regex: search, $options: "i" } },
-    ];
-  }
-
-  const invoices = await Invoice.find(q).sort({ createdAt: -1 });
-  return res.json({ success: true, data: invoices });
 }
 
 //GET Invoice by ID

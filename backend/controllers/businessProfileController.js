@@ -133,12 +133,15 @@ export async function updateBusinessProfile(req, res) {
 //get business profile for the authenticated user
 
 export async function getMyBusinessProfile(req, res) {
+  console.log("Fetching business profile for user....");
+
     try {
         const { userId } = getAuth(req);
         if (!userId) {
             return res.status(401).json({ message: "Unauthorized", success: false });
         }
         const profile = await BusinessProfile.findOne({ owner: userId });
+        console.log("Business profile fetched:", profile);
         if (!profile) {
             return res.status(404).json({ message: "Business profile not found", success: false });
         }
