@@ -2,6 +2,7 @@ import React, { use, useCallback, useEffect, useState,useMemo } from 'react'
 import { dashboardStyles } from '../assets/dummyStyles'
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@clerk/clerk-react';
+import KpiCard from '../components/KpiCard';
 
 const API_BASE= "http://localhost:5000"
 
@@ -364,6 +365,58 @@ function Dashboard() {
           {/* Your dashboard content goes here */}
         </div>
       )}
+      <div className={dashboardStyles.kpiGrid}>
+        <KpiCard
+          title="Total Invoices"
+          value={kpis.totalInvoices}
+          hint="Active invoices in your system"
+          iconType="document"
+          trend={8.5}
+        />
+         <KpiCard
+          title="Total Paid"
+          value={currencyFmt(kpis.totalPaid, "INR")}
+          hint="Received payments in INR"
+          iconType="revenue"
+          trend={12.5}
+        />
+         <KpiCard
+          title="Total Unpaid"
+          value={currencyFmt(kpis.totalUnpaid, "INR")}
+          hint="Pending payments in INR"
+          iconType="pending"
+          trend={-5.2}
+        />
+      </div>
+      <div className={dashboardStyles.mainGrid}>
+        <div className={dashboardStyles.sidebarColumn}>
+          <div className={dashboardStyles.quickStatsCard}>
+            <h3 className={dashboardStyles.quickStatsTitle}>Quick Stats</h3>
+            <div className='space-y-3'>
+              <div className={dashboardStyles.quickStatsRow}>
+                <span className={dashboardStyles.quickStatsLabel}>Paid Rate</span>
+                <span className={dashboardStyles.quickStatsValue}>
+                  {kpis.totalInvoices > 0
+                    ? `${((kpis.paidCount / kpis.totalInvoices) * 100).toFixed(1)}`
+                    : "0"} %
+                </span>
+              </div>
+              <div className={dashboardStyles.quickStatsRow}>
+                <span className={dashboardStyles.quickStatsLabel}>Avg. Invoice</span>
+                <span className={dashboardStyles.quickStatsValue}>
+                  {currencyFmt(kpis.totalInvoices > 0 ? (kpis.totalPaid + kpis.paidCount)/kpis.totalInvoices : 0, "INR")}
+                </span>
+              </div>
+              <div className={dashboardStyles.quickStatsRow}>
+                <span className={dashboardStyles.quickStatsLabel}>Collection Eff</span>
+                <span className={dashboardStyles.quickStatsValue}>
+                  ${kpis.paidPercentage.toFixed(1)}% 
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
