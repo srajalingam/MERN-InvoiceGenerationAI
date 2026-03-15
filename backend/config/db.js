@@ -1,8 +1,12 @@
 import mongoose from "mongoose";
+// import dns from "dns";
+
+// dns.setDefaultResultOrder("ipv4first");
 
 export const connectDB = async () => {
   try {
-    await mongoose.connect('mongodb+srv://lingamraja299_db_user:rainvoice@cluster0.hwtbhpp.mongodb.net/RAInvoice').then(() => {
+    //mongodb+srv://lingamraja299_db_user:<db_password>@cluster0.ex4qkwx.mongodb.net/
+    await mongoose.connect(process.env.MONGO_URI).then(() => {
         console.log("MongoDB connected successfully");
     });
   } catch (error) {

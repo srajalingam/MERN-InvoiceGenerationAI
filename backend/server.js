@@ -6,6 +6,9 @@ import { clerkMiddleware } from '@clerk/express'
 
 import {connectDB} from './config/db.js'
 
+// import dns from "dns";
+
+
 import path from 'path'
 import invoiceRouter from './routes/invoiceRouter.js'
 import businessProfileRouter from './routes/businessProfileRoute.js'
@@ -22,6 +25,8 @@ app.use(cors({
 app.use(clerkMiddleware({ publishableKey: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }))
 app.use(express.json({limit: '20mb'}))
 app.use(express.urlencoded({limit: '20mb', extended: true}))
+
+// dns.setDefaultResultOrder("ipv4first");
 
 // Connect to MongoDB
 connectDB()
