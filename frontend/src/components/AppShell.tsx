@@ -77,7 +77,7 @@ const LogoutIcon = ({ className = "w-5 h-5" }) => (
 const SidebarLink = ({
   to,
   icon,
-  children: any,
+  children,
 }: {
   to: string;
   icon: React.ReactNode;
@@ -105,7 +105,7 @@ const SidebarLink = ({
         >
           {icon}
         </div>
-        ==
+        {children}
       </>
     )}
   </NavLink>

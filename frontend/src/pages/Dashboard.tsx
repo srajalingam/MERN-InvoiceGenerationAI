@@ -563,10 +563,9 @@ function Dashboard() {
                             </td>
                             <td className={dashboardStyles.tableCell}>
                              <StatusBadge
-                              // status={inv.status}
-                              // size={default}
-                              // showIcon={true}
-                              //watch 3.34 continue 
+                              status={inv.status}
+                              size="default"
+                              showIcon={true}
                              />
                             </td>
                             <td className={dashboardStyles.tableCell}>

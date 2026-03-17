@@ -73,3 +73,4 @@ export default defineConfig([
 ```
 
 reference repo:https://github.com/HexagonDigitalServices/Invoice/tree/main/frontend/src/assets
+https://www.youtube.com/watch?v=2Mrwszudm9M&t=12898s
