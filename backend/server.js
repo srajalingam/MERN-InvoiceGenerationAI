@@ -34,7 +34,7 @@ connectDB()
 //routes
 
 app.use('/uploads', express.static(path.join(path.resolve(), 'uploads')))
-app.use('/api/invoices', invoiceRouter)
+app.use('/api/invoice', invoiceRouter)
 app.use('/api/businessProfile', businessProfileRouter)
 app.use('/api/ai', aiInvoiceRouter) // AI invoice generation route
 

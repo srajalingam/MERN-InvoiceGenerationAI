@@ -6,6 +6,7 @@ import { RedirectToSignIn, SignedIn, SignedOut } from '@clerk/clerk-react'
 
 import AppShell from './components/AppShell'
 import Dashboard from './pages/Dashboard'
+import CreateInvoice from './pages/CreateInvoice'
 
 const ClerkProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
           </ClerkProtectedRoute>
         }>
           <Route path="dashboard" element={<Dashboard />} />
+          <Route path='create-invoice' element={<CreateInvoice/>}/>
         </Route>
       </Routes>
     </div>

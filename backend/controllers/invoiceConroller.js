@@ -73,6 +73,17 @@ async function generateUniqueInvoiceNumber(attempts = 8) {
   }
   return new mongoose.Types.ObjectId().toString();
 }
+
+function computeTotals(items = [], taxPercent = 0) {
+  const safe = Array.isArray(items) ? items.filter(Boolean) : [];
+  const subtotal = safe.reduce(
+    (s, it) => s + Number(it.qty || 0) * Number(it.unitPrice || 0),
+    0
+  );
+  const tax = (subtotal * Number(taxPercent || 0)) / 100;
+  const total = subtotal + tax;
+  return { subtotal, tax, total };
+}
 /* ----------------- CREATE ----------------- */
 export async function createInvoice(req, res) {
   try {

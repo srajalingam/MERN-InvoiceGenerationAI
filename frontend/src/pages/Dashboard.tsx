@@ -167,7 +167,7 @@ function Dashboard() {
       const token = await obtainToken();
       const headers: Record<string, string> = {Accept: "application/json"};
       if(token) headers["Authorization"] = `Bearer ${token}`;
-      const res = await fetch(`${API_BASE}/api/invoices`, {headers,method: "GET"});
+      const res = await fetch(`${API_BASE}/api/invoice`, {headers,method: "GET"});
       if (!res.ok) {
         throw new Error(`Error fetching invoices: ${res.statusText}`);
       }
