@@ -9,6 +9,7 @@ import Dashboard from './pages/Dashboard'
 import CreateInvoice from './pages/CreateInvoice'
 import Invoices from './pages/Invoices'
 import InvoicePreview from './components/InvoicePreview'
+import BusinessProfile from './pages/BusinessProfile'
 
 const ClerkProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -38,6 +39,7 @@ const App = () => {
           <Route path='invoices/:id/preview' element={<InvoicePreview/>}/>
           <Route path='invoices/:id/edit' element={<CreateInvoice/>}/>
           <Route path='create-invoice' element={<CreateInvoice/>}/>
+          <Route path='business' element={ <BusinessProfile/>}/>
         </Route>
       </Routes>
     </div>
